@@ -38,7 +38,6 @@ def weat(sent):
 	   speak(f"Temperature: {temperature}")
 	   speak(f"Humidity: {humidity}")
 	   speak(f"Weather Report is: {report[0]['description']}")
-
 	   print(f"{city:-^30}")
 	   print(f"Temperature: {temperature}")
 	   print(f"Humidity: {humidity}")
@@ -94,16 +93,19 @@ def news():
 	url = ('https://newsapi.org/v2/top-headlines?country=in&apiKey=')
 	api_key = # Your API key here
 	url+=api_key
+	i=0
 		try:
 			response = requests.get(url)
 		except:
 			speak("couldn't retrieve information, please check your internet.")
-
 		news = json.loads(response.text)
-
 		for new in news['articles']:
-			speak(str(new['title']))
-			time.sleep(2)
+			if(i<5):
+				speak(str(new['title']))
+				i=i+1
+				time.sleep(2)
+			else:
+				break
 
 
 # pyttsx is the python text to speech library,initialise and set values for voice characteristics.
